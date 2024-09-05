@@ -80,7 +80,7 @@ function AnimePage() {
                         </div>
                     </div>
                     <div className='video'>
-                        <iframe title='video' src={animeData.kodik_link} width="800" height="500" frameborder="0" AllowFullScreen allow="autoplay *; fullscreen *"></iframe>
+                        <iframe title='video' src={animeData.kodik_link} width="100%" height="500" frameborder="0" AllowFullScreen allow="autoplay *; fullscreen *"></iframe>
                     </div>
                 </Container>
             </div>

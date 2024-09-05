@@ -65,7 +65,7 @@ function AnimePage() {
                                 Возрастной рейтинг: {animeData.age}
                             </div>
                             <div className='position-relative text-start d-flex'>
-                                Жанры: <div className='position-relative d-flex'>{animeData.genres.map(item => <div className='mini-block'> {item.name}</div>)}</div>
+                                Жанры: <div className='position-relative d-flex flex-wrap gap-1'>{animeData.genres.map(item => <div className='mini-block'> {item.name}</div>)}</div>
                             </div>
                             <div className='position-relative text-start d-flex'>
                                 Студия: {animeData.studio && animeData.studio.name}
@@ -80,7 +80,7 @@ function AnimePage() {
                         </div>
                     </div>
                     <div className='video'>
-                        <iframe title='video' src={animeData.kodik_link} width="800" height="500" frameborder="0" AllowFullScreen allow="autoplay *; fullscreen *"></iframe>
+                        <iframe title='video' src={animeData.kodik_link} width="100%" height="500" frameborder="0" AllowFullScreen allow="autoplay *; fullscreen *"></iframe>
                     </div>
                 </Container>
             </div>

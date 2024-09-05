@@ -1,0 +1,12 @@
+
+.bg-gray {
+    background-color: #363535;
+}
+
+.mini-block {
+    margin-left: 5px;
+    margin-right: 5px;
+    background-color: rgb(24, 25, 27);
+    padding: 5px;
+    border-radius: 10px;
+}

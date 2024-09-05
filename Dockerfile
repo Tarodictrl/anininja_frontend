@@ -1,7 +1,8 @@
 FROM node:12-alpine as build
 WORKDIR /app
 COPY package.json /app/package.json
-RUN apt install npm
+CMD ["apt", "apt", "npm"]
+RUN apt apt npm
 RUN npm install --only=prod
 COPY . /app
 RUN npm run build

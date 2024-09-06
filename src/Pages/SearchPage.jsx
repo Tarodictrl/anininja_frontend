@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
-import Header from '../Header/Header';
-import Authorization from '../Authorization/Authorization';
-import Footer from '../Footer/Footer';
+import Header from '../Components/Header/Header';
+import Authorization from '../Components/Authorization/Authorization';
+import Footer from '../Components/Footer/Footer';
 import { useSearchParams } from 'react-router-dom';
 
-import AnimeList from './AnimeList';
-import Search from '../Search/Search';
+import AnimeList from '../Components/Main/AnimeList';
+import Search from '../Components/Search/Search';
 
 function SearchPage() {
     const [searchParams] = useSearchParams();

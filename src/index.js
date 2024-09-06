@@ -11,8 +11,29 @@ import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "react-image-gallery/styles/css/image-gallery.css";
 
-import AnimePage from './Components/Main/AnimePage';
-import SearchPage from './Components/Main/SearchPage';
+import AnimePage from './Pages/AnimePage';
+import SearchPage from './Pages/SearchPage';
+import AnimeChartPage from './Pages/AnimeChartPage'
+import { Navigate } from 'react-router-dom';
+
+
+const getRandom = async () => {
+  const response = await fetch(
+    `https://api.anininja.ru/api/anime/random`,
+      {
+          method: 'GET',
+          headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+          },
+      }
+    );
+
+    if (response.ok) {
+          let value = await response.json()
+          return value.url;
+    }
+}
 
 
 const router = createBrowserRouter([
@@ -33,6 +54,16 @@ const router = createBrowserRouter([
     element: (
       <SearchPage />
     ),
+  },
+  {
+    path: "/anime/chart",
+    element: (
+      <AnimeChartPage />
+    ),
+  },
+  {
+    path: "/anime/random",
+    element: <Navigate to={await getRandom()} replace />
   },
 ]);
 

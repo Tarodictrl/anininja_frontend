@@ -4,7 +4,7 @@ import './App.css';
 import Header from './Components/Header/Header';
 import Authorization from './Components/Authorization/Authorization';
 import Footer from './Components/Footer/Footer';
-import Main from './Components/Main/Main'
+import MainPage from './Pages/MainPage'
 
 import Search from './Components/Search/Search';
 
@@ -20,7 +20,7 @@ function App() {
       </header>
       <div className='bg-dark pt-5'>
         <Search />
-        <Main />
+        <MainPage />
       </div>
       <footer className='App-footer'>
         <Footer />

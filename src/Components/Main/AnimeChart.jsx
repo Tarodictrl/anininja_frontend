@@ -5,14 +5,14 @@ import ReactPaginate from 'react-paginate'
 
 import AnimeList from './AnimeList';
 
-const Main = () => {
+const AnimeChart = () => {
 
     const [animeData, setAnimeData] = useState({'responses': []});
 
     useEffect(() => {
       const func = async () => {
           const response = await fetch(
-              'https://api.anininja.ru/api/anime/?limit=24&offset=0&year=2024&season=3&order_by=relevance&direction=asc',
+              'https://api.anininja.ru/api/anime/?order_by=relevance&direction=asc',
               {
                   method: 'GET',
                   headers: {
@@ -30,9 +30,9 @@ const Main = () => {
     }, []);
 
     const handlePageClick = async (event) => {
-        const newOffset = (event.selected * animeData.limit) % animeData.total;
+        const newOffset = (event.selected * 24);
         const response = await fetch(
-              `https://api.anininja.ru/api/anime/?limit=24&offset=${newOffset}&year=2024&season=3&order_by=relevance&direction=asc`,
+              `https://api.anininja.ru/api/anime/?limit=24&offset=${newOffset}&order_by=relevance&direction=asc`,
               {
                   method: 'GET',
                   headers: {
@@ -49,13 +49,13 @@ const Main = () => {
 
     return (
           <Container>
-            <h1 className='text-white'>Аниме летнего сезона</h1>
+            <h1 className='text-white'>Лучшие аниме</h1>
             <ReactPaginate
                 breakLabel="..."
                 nextLabel=">"
                 onPageChange={handlePageClick}
-                pageRangeDisplayed={animeData.total / animeData.limit}
-                pageCount={animeData.total / animeData.limit}
+                pageRangeDisplayed={5}
+                pageCount={5}
                 previousLabel="<"
                 renderOnZeroPageCount={null}
                 breakClassName={'page-item'}
@@ -74,4 +74,4 @@ const Main = () => {
       );
 };
 
-export default Main;
+export default AnimeChart;

@@ -1,0 +1,30 @@
+nav {
+    text-transform: uppercase;
+}
+
+.nav-link {
+    transition: .2s;
+    margin: 10px;
+}
+.nav-link:hover {
+    background-color: rgb(25, 135, 84, 1);
+}
+
+.sub-menu-link:before {
+    content: '';
+    position: absolute;
+    display: block;
+    margin: auto;
+    height: 0;
+    width: 0;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 8px solid var(--main-red)
+}
+
+.dropdown:hover>.dropdown-menu {
+    display: block;
+}

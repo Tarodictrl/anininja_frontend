@@ -4,9 +4,9 @@ import Header from '../Components/Header/Header';
 import Authorization from '../Components/Authorization/Authorization';
 import Footer from '../Components/Footer/Footer';
 import Search from '../Components/Search/Search';
-import AnimeChart from '../Components/Main/AnimeChart';
+import AnimeOngoing from '../Components/Main/AnimeOngoing';
 
-function AnimeChartPage() {
+function AnimeOngoingPage() {
     return (
         <div className="App">
           <div className="App-top">
@@ -17,7 +17,7 @@ function AnimeChartPage() {
           </header>
           <div className='bg-dark pt-5'>
             <Search />
-            <AnimeChart />
+            <AnimeOngoing />
           </div>
           <footer className='App-footer'>
             <Footer />
@@ -26,4 +26,4 @@ function AnimeChartPage() {
       );
 }   
 
-export default AnimeChartPage;
+export default AnimeOngoingPage;

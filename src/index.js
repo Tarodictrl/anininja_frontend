@@ -4,17 +4,20 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import { Navigate } from 'react-router-dom';
 
-import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "react-image-gallery/styles/css/image-gallery.css";
 
+import './index.css';
+import App from './App';
 import AnimePage from './Pages/AnimePage';
 import SearchPage from './Pages/SearchPage';
 import AnimeChartPage from './Pages/AnimeChartPage'
-import { Navigate } from 'react-router-dom';
+import AnimeCatalogPage from './Pages/AnimeCatalogPage'
+import AnimeOngoingPage from './Pages/AnimeOngoingPage'
+import AnimeAnnouncementPage from './Pages/AnimeAnnouncementPage'
 
 
 const getRandom = async () => {
@@ -64,6 +67,24 @@ const router = createBrowserRouter([
   {
     path: "/anime/random",
     element: <Navigate to={await getRandom()} replace />
+  },
+  {
+    path: "/anime/catalog",
+    element: (
+      <AnimeCatalogPage />
+    )
+  },
+  {
+    path: "/anime/ongoing",
+    element: (
+      <AnimeOngoingPage />
+    )
+  },
+  {
+    path: "/anime/announcement",
+    element: (
+      <AnimeAnnouncementPage />
+    )
   },
 ]);
 

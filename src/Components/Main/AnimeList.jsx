@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Container from 'react-bootstrap/Container';
 
 import AnimeItem from './AnimeItem'
-
+import './AnimeItem.css'
 
 const AnimeList = ({ data }) => {
     return (

@@ -49,6 +49,7 @@ const MainPage = () => {
 
     return (
           <Container>
+            <title>Аниме летнего сезона</title>
             <h1 className='text-white'>Аниме летнего сезона</h1>
             <ReactPaginate
                 breakLabel="..."

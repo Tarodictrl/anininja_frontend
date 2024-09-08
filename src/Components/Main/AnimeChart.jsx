@@ -12,7 +12,7 @@ const AnimeChart = () => {
     useEffect(() => {
       const func = async () => {
           const response = await fetch(
-              'https://api.anininja.ru/api/anime/?order_by=relevance&direction=asc',
+              'https://api.anininja.ru/api/anime/?limit=24&order_by=relevance&direction=asc',
               {
                   method: 'GET',
                   headers: {

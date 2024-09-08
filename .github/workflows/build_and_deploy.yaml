@@ -71,8 +71,8 @@ jobs:
             docker container stop ${{ env.NAME }} &>/dev/null || echo "Cant stop container";
             docker container rm ${{ env.NAME }} &>/dev/null || echo "Cant remove container";
             docker run --name ${{ env.NAME }} --restart=always \
-              --env-file .env -d --net=host \
-              ${{ fromJSON(steps.meta.outputs.json).tags[0] }} npm run build
+              -d --net=host \
+              ${{ fromJSON(steps.meta.outputs.json).tags[0] }}
             echo "Logging out from dockerhub..."
             docker logout
             echo "Done!"

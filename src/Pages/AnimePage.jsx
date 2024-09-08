@@ -52,31 +52,71 @@ function AnimePage() {
                             <div>
                                 {animeData.alternativeNames.map(item => <li>{item}</li>)}
                             </div>
-                            <div className='position-relative text-start'>
-                                Статус: {animeData.status}
+                            <div className='position-relative text-start row'>
+                                <div className="col-sm-3">
+                                    <span>Статус:</span>
+                                </div>
+                                <div className="col">
+                                    {animeData.status}
+                                </div>
                             </div>
-                            <div className='position-relative text-start'>
-                                Тип: {animeData.type}
+                            <div className='position-relative text-start row'>
+                                <div className="col-sm-3">
+                                    <span>Тип:</span>
+                                </div>
+                                <div className="col">
+                                    {animeData.type}
+                                </div>
                             </div>
-                            <div className='position-relative text-start'>
-                                Год выхода: {animeData.year}
+                            <div className='position-relative text-start row'>
+                                <div className="col-sm-3">
+                                    <span>Год выхода:</span>
+                                </div>
+                                <div className="col">
+                                    {animeData.year}
+                                </div>
                             </div>
-                            <div className='position-relative text-start'>
-                                Возрастной рейтинг: {animeData.age}
+                            <div className='position-relative text-start row'>
+                            <div className="col-sm-3">
+                                    <span>Возрастной рейтинг:</span>
+                                </div>
+                                <div className="col">
+                                    {animeData.age}
+                                </div>
                             </div>
-                            <div className='position-relative text-start d-flex'>
-                                Жанры: <div className='position-relative d-flex flex-wrap gap-1'>{animeData.genres.map(item => <div className='mini-block'> {item.name}</div>)}</div>
+                            <div className='position-relative text-start d-flex row'>
+                            <div className="col-sm-3">
+                                    <span>Жанры:</span>
+                                </div>
+                                <div className="col">
+                                    <div className='position-relative d-flex flex-wrap gap-1'>{animeData.genres.map(item => <div className='mini-block'> {item.name}</div>)}</div>
+                                </div>
                             </div>
-                            <div className='position-relative text-start d-flex'>
-                                Студия: {animeData.studio && animeData.studio.name}
+                            <div className='position-relative text-start d-flex row'>
+                                <div className="col-sm-3">
+                                    <span>Студия:</span>
+                                </div>
+                                <div className="col">
+                                    {animeData.studio && animeData.studio.name}
+                                </div>
                             </div>
-                            <div className='position-relative text-start d-flex'>
-                                Режиссер: <div className='position-relative d-flex'>{animeData.directors.map(item => <div className='mini-block'> {item.name}</div>)}</div>
+                            <div className='position-relative text-start d-flex row'>
+                                <div className="col-sm-3">
+                                    <span>Режиссер:</span>
+                                </div>
+                                <div className="col">
+                                    <div className='position-relative d-flex'>{animeData.directors.map(item => <div className='mini-block'> {item.name}</div>)}</div>
+                                </div>
                             </div>
-                            <div className='position-relative text-start d-flex'>
-                                Количество серий: {animeData.countSeries}
+                            <div className='position-relative text-start d-flex row'>
+                                <div className="col-sm-3">
+                                    <span>Количество серий:</span>
+                                </div>
+                                <div className="col">
+                                    {animeData.countSeries}
+                                </div>
                             </div>
-                            <div className='mt-3'>{animeData.description}</div>
+                            <div className='mt-3 text-start'>{animeData.description}</div>
                         </div>
                     </div>
                     <div className='video'>

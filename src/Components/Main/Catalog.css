@@ -1,0 +1,65 @@
+.anime-catalog {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 100px;
+    margin-right: 100px;
+    align-items: flex-start;
+}
+
+.anime-catalog-list {
+    justify-content: space-between;
+    color: white;
+    width: 100%;
+}
+
+.anime-catalog-filter {
+    padding: 10px;
+    display: flex;
+    color: white;
+    width: 500px;
+    height: auto;
+    text-align: center;
+}
+
+.anime-catalog-title {
+    text-align: center;
+}
+
+.form-select {
+    height: 2rem;
+    font-size: 15px;
+    background-color: rgba(62, 117, 143, 0.342);
+    color: white;
+}
+
+.anime-catalog-items {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.anime-item-card {
+    margin: 10px;
+    width: auto;
+    border-radius: 100px;
+}
+
+.anime-item-card-img {
+    border-radius: 10px;
+}
+
+.anime-item-card-img:hover {
+    transform: scale(1.05);
+    transition: 0.5s;
+}
+
+.anime-item-card {
+    position: relative;
+}
+
+.anime-catalog-empty {
+    text-align: center;
+    color: white;
+    margin-top: 50px;
+    width: 100%;
+    font-size: 30px;
+}

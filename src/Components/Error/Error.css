@@ -1,0 +1,22 @@
+.error {
+    text-align: center;
+    color: white;
+    margin-top: 20rem;
+    margin-bottom: 20rem;
+}
+
+.error .number {
+    font-weight: bold;
+}
+
+.btn {
+    background-color: rgba(33,42,79,1);
+    color: white;
+    transition: .2s;
+    width: 100px;
+}
+
+.btn:hover {
+    background-color: rgba(33,42,79,1);
+    border: 1px solid white;
+}

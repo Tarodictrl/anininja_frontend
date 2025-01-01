@@ -1,24 +1,24 @@
 import React from 'react';
 import { createRoot } from "react-dom/client";
+import { Navigate } from 'react-router-dom';
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import { Navigate } from 'react-router-dom';
-
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "react-image-gallery/styles/css/image-gallery.css";
 
-import './index.css';
-import App from './App';
+import MainPage from './Pages/MainPage'
 import AnimePage from './Pages/AnimePage';
-import SearchPage from './Pages/SearchPage';
-import AnimeChartPage from './Pages/AnimeChartPage'
-import AnimeCatalogPage from './Pages/AnimeCatalogPage'
-import AnimeOngoingPage from './Pages/AnimeOngoingPage'
-import AnimeAnnouncementPage from './Pages/AnimeAnnouncementPage'
+import NotFoundPage from './Components/Error/NotFound';
+import App from './App';
+import AnimeCatalog from './Pages/AnimeCatalogPage';
 
+import './index.css';
+import SignInPage from './Pages/SignInPage';
+import RegistrationPage from './Pages/RegistrationPage';
+import ProfilePage from './Pages/ProfilePage';
 
 const getRandom = async () => {
   const response = await fetch(
@@ -34,6 +34,7 @@ const getRandom = async () => {
 
     if (response.ok) {
           let value = await response.json()
+          console.log(value);
           return value.url;
     }
 }
@@ -43,25 +44,31 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <App />
+      <App component={<MainPage />}/>
+    ),
+  },
+  {
+    path: "/sign_in",
+    element: (
+      <App component={<SignInPage />}/>
+    ),
+  },
+  {
+    path: "/registration",
+    element: (
+      <App component={<RegistrationPage />}/>
+    ),
+  },
+  {
+    path: "/anime/catalog",
+    element: (
+      <App component={<AnimeCatalog />}/>
     ),
   },
   {
     path: "/anime/:id",
     element: (
-      <AnimePage />
-    ),
-  },
-  {
-    path: "/anime/search",
-    element: (
-      <SearchPage />
-    ),
-  },
-  {
-    path: "/anime/chart",
-    element: (
-      <AnimeChartPage />
+      <App component={<AnimePage />}/>
     ),
   },
   {
@@ -69,30 +76,21 @@ const router = createBrowserRouter([
     element: <Navigate to={await getRandom()} replace />
   },
   {
-    path: "/anime/catalog",
+    path: "/profile",
     element: (
-      <AnimeCatalogPage />
-    )
+      <App component={<ProfilePage />}/>
+    ),
   },
   {
-    path: "/anime/ongoing",
+    path: "*",
     element: (
-      <AnimeOngoingPage />
+      <App component={<NotFoundPage />}/>
     )
-  },
-  {
-    path: "/anime/announcement",
-    element: (
-      <AnimeAnnouncementPage />
-    )
-  },
+  }
 ]);
 
 createRoot(document.getElementById("root")).render(
   <RouterProvider router={router} />
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

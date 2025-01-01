@@ -1,0 +1,37 @@
+.sign-in {
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    padding-bottom: 10rem;
+    padding-top: 10rem;
+}
+
+.sign-in form {
+    background-color: #9393c944;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: -1px -1px 10px 10px rgba(34, 60, 80, 0.658);
+}
+
+.error-message {
+    color: rgb(248, 67, 67);
+}
+
+.socials {
+    margin-bottom: 20px;
+}
+
+.socials a {
+    padding: 0 0 0 10px;
+}
+
+.reset-password {
+    padding-top: 10px;
+}
+
+.reset-password a {
+    color: rgb(206, 203, 203);
+    text-decoration: none;
+}

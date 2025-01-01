@@ -1,77 +1,83 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState} from 'react';
 
-import Container from 'react-bootstrap/Container';
-import ReactPaginate from 'react-paginate'
-
+import Error from '../Components/Error/Error';
+import Loading from '../Components/Loading/Loading';
 import AnimeList from '../Components/Main/AnimeList';
+
+import './MainPage.css';
 
 const MainPage = () => {
 
-    const [animeData, setAnimeData] = useState({'responses': []});
+    const [animeNewData, setAnimeNewData] = useState({'responses': []});
+    const [animeAnnouncData, setAnimeAnnouncData] = useState({'responses': []});
+    const [animeTopData, setAnimeTopData] = useState({'responses': []});
+    const [filmsTopData, setFilmsTopData] = useState({'responses': []});
+
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
 
     useEffect(() => {
-      const func = async () => {
-          const response = await fetch(
-              'https://api.anininja.ru/api/anime/?limit=24&offset=0&year=2024&season=3&order_by=relevance&direction=asc',
-              {
-                  method: 'GET',
-                  headers: {
-                      Accept: 'application/json',
-                      'Content-Type': 'application/json',
-                  },
-              }
-          );
-
-          if (response.ok) {
-              setAnimeData(await response.json());
-          }
-        };
-        func()
+        document.title = "Главная";
+        Promise.all([
+            fetch('https://api.anininja.ru/api/anime/?status=онгоинг'),
+            fetch('https://api.anininja.ru/api/anime/?status=анонс'),
+            fetch('https://api.anininja.ru/api/anime/?'),
+            fetch('https://api.anininja.ru/api/anime/?&type=Полнометражный фильм'),
+        ])
+            .then(([resultAnimeNewData, resultAnimeAnnouncData, resultAnimeTopData, resultFilmsTopData]) =>
+                Promise.all([resultAnimeNewData.json(), resultAnimeAnnouncData.json(), resultAnimeTopData.json(), resultFilmsTopData.json()])
+            )
+            .then(([resultAnimeNewData, resultAnimeAnnouncData, resultAnimeTopData, resultFilmsTopData]) => {
+                setAnimeNewData(resultAnimeNewData);
+                setAnimeAnnouncData(resultAnimeAnnouncData);
+                setAnimeTopData(resultAnimeTopData);
+                setFilmsTopData(resultFilmsTopData);
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.log(error.message)
+                setTimeout(() => {setLoading(false)}, 100000);
+                setError(true);
+            });
     }, []);
 
-    const handlePageClick = async (event) => {
-        const newOffset = (event.selected * animeData.limit) % animeData.total;
-        const response = await fetch(
-              `https://api.anininja.ru/api/anime/?limit=24&offset=${newOffset}&year=2024&season=3&order_by=relevance&direction=asc`,
-              {
-                  method: 'GET',
-                  headers: {
-                      Accept: 'application/json',
-                      'Content-Type': 'application/json',
-                  },
-              }
-          );
-
-          if (response.ok) {
-              setAnimeData(await response.json());
-        }
-    };
-
     return (
-          <Container>
-            <title>Аниме летнего сезона</title>
-            <h1 className='text-white'>Аниме летнего сезона</h1>
-            <ReactPaginate
-                breakLabel="..."
-                nextLabel=">"
-                onPageChange={handlePageClick}
-                pageRangeDisplayed={animeData.total / animeData.limit}
-                pageCount={animeData.total / animeData.limit}
-                previousLabel="<"
-                renderOnZeroPageCount={null}
-                breakClassName={'page-item'}
-                breakLinkClassName={'page-link'}
-                containerClassName={'pagination justify-content-center'}
-                pageClassName={'page-item'}
-                pageLinkClassName={'page-link'}
-                previousClassName={'page-item'}
-                previousLinkClassName={'page-link'}
-                nextClassName={'page-item'}
-                nextLinkClassName={'page-link'}
-                activeClassName={'active'}
-            />
-            <AnimeList data={animeData}></AnimeList>
-          </Container>
+        <>
+        {
+            error ?
+            <Error />
+            :
+            loading ?
+            <Loading />
+            :            
+            <div className="main">
+                <div className="anime-card">
+                    <div className="title">
+                        Новинки
+                    </div>
+                    <AnimeList data={animeNewData}/>
+                </div>
+                <div className="anime-card">
+                    <div className="title">
+                        Анонсы
+                    </div>
+                    <AnimeList data={animeAnnouncData}/>
+                </div>
+                <div className="anime-card">
+                    <div className="title">
+                        Топ аниме
+                    </div>
+                    <AnimeList data={animeTopData}/>
+                </div>
+                <div className="anime-card">
+                    <div className="title">
+                        Топ фильмов
+                    </div>
+                    <AnimeList data={filmsTopData}/>
+                </div>
+            </div>
+        }
+        </>
       );
 };
 

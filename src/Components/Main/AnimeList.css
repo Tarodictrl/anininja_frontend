@@ -1,0 +1,46 @@
+.kVtMtA {
+    opacity: 0;
+    background-color: #9393c9d2;
+    color: white;
+    left: 1.5rem;
+}
+
+.bhRnqO {
+    opacity: 0;
+    background-color: #9393c9cc;
+    right: 1.5rem;
+}
+
+.bhRnqO::before {
+    border-top: 2px solid white;
+    border-right: 2px solid white;
+}
+
+.kVtMtA::before {
+    content: '';
+    height: 10px;
+    width: 10px;
+    background: transparent;
+    border-top: 2px solid white;
+    border-right: 2px solid white;
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-25%, -50%) rotate(-135deg);
+    -ms-transform: translate(-25%, -50%) rotate(-135deg);
+    transform: translate(-25%, -50%) rotate(-135deg);
+}
+
+.bghjHX {
+    margin: 0;
+}
+
+.bqyzQp:hover .kVtMtA {
+    opacity: 1;
+}
+
+.bqyzQp:hover .bhRnqO {
+    opacity: 1;
+}
+

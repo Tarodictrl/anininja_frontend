@@ -1,52 +1,106 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { NavLink }  from 'react-router-dom';
 import Image from 'react-bootstrap/Image';
 
 import './Header.css'
 
 const Header = () => {
-  
+  const [isOpen, setIsOpen] = useState(false);
+  const [userData, setUserData] = useState();
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
+  useEffect(() => {
+        const getData = async () => {
+          try {
+              const response = await fetch(
+                  `https://api.anininja.ru/api/user/profile`,
+                  {
+                      method: 'GET',
+                      credentials: "include",
+                      headers: {
+                          Accept: 'application/json',
+                          'Content-Type': 'application/json',
+                      },
+                  }
+              );
+    
+              if (response.ok) {
+                  let value = await response.json();
+                  setUserData(value);
+              }
+          }
+          catch(error) {
+              console.log(error);
+          }
+          };
+          getData();
+      }, []);
   return (
-        <Navbar bg="dark" data-bs-theme="dark" className='border-top border-bottom border-4 border-success p-0'>
+        <Navbar className='header p-0'>
           <Container d="flex" flex="wrap">
             <Navbar.Brand href="/" className='p-0 m-0'>
-              <Image src="/logo.png" width={180}>
-              </Image>
+              <Image src="/logo.png" width={90} />
             </Navbar.Brand>
             <Nav>
-              <Nav.Link href="/" className='text-white'>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-house-door" viewBox="0 1 16 16">
-                      <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4z"/>
-                  </svg>
-                  <span className='ps-1'>Главная</span>
-              </Nav.Link>
-              <Nav.Link href="/anime/catalog" className='text-white sub-menu-link dropdown'>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-list-ul" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
-                  </svg>
-                  <span className='ps-1'>Аниме</span>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="/anime/ongoing">Онгоинги</a>
-                    <a class="dropdown-item" href="/anime/announcement">Анонсы</a>
-                  </div>
-              </Nav.Link>
-              <Nav.Link href="/anime/chart"  className='text-white'>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bar-chart" viewBox="0 1 16 16">
-                      <path d="M4 11H2v3h2zm5-4H7v7h2zm5-5v12h-2V2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1z"/>
-                  </svg>
-                  <span className='ps-1'>Топ-100</span>
-              </Nav.Link>
-              <Nav.Link href="/anime/random"  className='text-white'>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-shuffle" viewBox="0 0 16 16">
-                      <path fill-rule="evenodd" d="M0 3.5A.5.5 0 0 1 .5 3H1c2.202 0 3.827 1.24 4.874 2.418.49.552.865 1.102 1.126 1.532.26-.43.636-.98 1.126-1.532C9.173 4.24 10.798 3 13 3v1c-1.798 0-3.173 1.01-4.126 2.082A9.6 9.6 0 0 0 7.556 8a9.6 9.6 0 0 0 1.317 1.918C9.828 10.99 11.204 12 13 12v1c-2.202 0-3.827-1.24-4.874-2.418A10.6 10.6 0 0 1 7 9.05c-.26.43-.636.98-1.126 1.532C4.827 11.76 3.202 13 1 13H.5a.5.5 0 0 1 0-1H1c1.798 0 3.173-1.01 4.126-2.082A9.6 9.6 0 0 0 6.444 8a9.6 9.6 0 0 0-1.317-1.918C4.172 5.01 2.796 4 1 4H.5a.5.5 0 0 1-.5-.5"/>
-                      <path d="M13 5.466V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192m0 9v-3.932a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192"/>
-                  </svg>
-                  <span className='ps-1'>Случайное</span>
-              </Nav.Link>
+                <NavLink to="/" className={({ isActive }) => (isActive ? 'navigate active' : 'navigate')}>
+                    <span className='ps-1'>Главная</span>
+                </NavLink>
+                <NavLink to="/anime/catalog" className={({ isActive }) => (isActive ? 'navigate active' : 'navigate')}>
+                    <span className='ps-1'>Аниме</span>
+                </NavLink>
+                <a href="/anime/random" className='navigate'>
+                    <span className='ps-1'>Случайное</span>
+                </a>
             </Nav>
-          </Container> 
+            {
+              userData ?
+              <div className="profile navigate">
+                <a href="/profile">
+                  <button className="avatar-button" onClick={toggleMenu}>
+                    <Image className='avatar-small' src={userData.avatar}/>
+                  </button>
+                </a>
+              </div>
+              :
+              <div className="signin navigate">
+                <a href="/sign_in">
+                  <button className="button" onClick={toggleMenu}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                      <path fillRule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z"/>
+                      <path fillRule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+                    </svg>
+                    Войти
+                  </button>
+                </a>
+              </div>
+            }
+            <div className="menu">
+              <button className="button" onClick={toggleMenu}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" className="bi bi-list" viewBox="0 0 16 16">
+                  <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+                </svg>
+              </button>
+              <nav className={`nav-menu ${isOpen ? 'open' : ''}`}>
+                <ul>
+                  <li><a href="/">Главная</a></li>
+                  <li><a href="/anime/catalog">Аниме</a></li>
+                  <li><a href="/films/catalog">Фильмы</a></li>
+                  {
+                    userData ?
+                    <li><a href="/user/profile">Профиль</a></li>
+                    :
+                    <li><a href="/sing_in">Войти</a></li>
+                  }
+                </ul>
+              </nav>
+            </div>
+          </Container>
         </Navbar>
     );
 };

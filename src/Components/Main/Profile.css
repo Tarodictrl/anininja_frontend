@@ -1,0 +1,17 @@
+.card-avatar{
+    width: 200px;
+}
+
+.card {
+    margin-left: 100px;
+    margin-right: 100px;
+    border: 1px solid rgb(114, 113, 113);
+    border-radius: 12px;
+    filter: brightness(110%);
+    background-color: rgba(52, 52, 56, 0.192);
+    color: white;
+}
+
+.card-header {
+    border-bottom: rgb(114, 113, 113) solid 2px;
+}

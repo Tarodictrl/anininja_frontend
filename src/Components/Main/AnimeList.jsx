@@ -1,31 +1,23 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import Container from 'react-bootstrap/Container';
+import Carousel from 'react-grid-carousel'
 
-import AnimeItem from './AnimeItem'
-import './AnimeItem.css'
+import './AnimeList.css'
+import AnimeItemMiniCard from './AnimeItemMiniCard';
+
 
 const AnimeList = ({ data }) => {
-    return (
-          <Container className='pb-3'>
-            {data.responses.length !== 0 && (
-                <div className='row text-white'>
-                    {data.responses.map((item) => {
-                        return (
-                            <AnimeItem
-                                key={item.id}
-                                data={item}
-                            />
-                        );
-                    })}
-                </div>
-            )}
-          </Container>
-      );
-};
 
-AnimeList.propTypes = {
-    data: PropTypes.arrayOf().isRequired,
+    return (
+        <Carousel cols={10} rows={1} gap={0} showDots={false} scrollSnap loop>
+          {data.responses.map((item) => {
+                return (
+                    <Carousel.Item key={item.id}>
+                        <AnimeItemMiniCard item={item}/>
+                    </Carousel.Item>
+                );
+            })}
+        </Carousel>
+    )
 };
 
 export default AnimeList;
